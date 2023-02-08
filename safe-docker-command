@@ -1,0 +1,21 @@
+#!/bin/bash
+ll=`whoami`
+#sttime=`echo $(date "+%Y%m%d-%H%M%S")`
+aa=$@
+case $@ in
+  "run"*)
+    aa=$@
+    bb=`echo ${aa/run/}`
+    uu=`id|tr " " "\n"|grep uid|egrep -oi "[0-9]"`
+    /usr/bin/docker run -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u $uu $bb
+    ;;
+  "rm"*)
+    aa=$@
+    bb=`echo $aa|awk '{print $NF}'`
+    #bb=`echo ${aa/"rm -f"/}`
+    /usr/bin/docker stop $bb
+    ;;
+  *) 
+    /usr/bin/docker $@
+    ;;
+esac
