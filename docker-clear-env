@@ -1,0 +1,4 @@
+In prodcut,most user has their own env when you run docker and volume your home-directory,you may quote their work-env to start docker.
+If you have py perl R suggest to use these param to make sure use the dokcer-env:
+ -e R_LIBS=/usr/lib64/R/library:/usr/share/R/library
+ ~/$USER/.local
